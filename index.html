@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <!-- Lock to a mobile experience regardless of device -->
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#04101d" />
+    <meta name="theme-color" content="#000409" />
     <meta name="color-scheme" content="dark" />
 
     <title>THE INVISIBLE MONEY · ดักทางรายใหญ่</title>
@@ -40,6 +40,9 @@
         /* blues */
         --blue: #0077ff;
         --ink-blue: #04101d;
+        /* exact top-edge color of the background image — used to blend
+           seamlessly above the bottom-anchored artwork on tall screens */
+        --bg-seam: #000409;
 
         /* card title chip */
         --chip-top: #000d1b;
@@ -75,7 +78,7 @@
       /* ───────────────── desktop backdrop (mobile-only frame) ───────────────── */
       body {
         font-family: var(--font);
-        background: #03070e;
+        background: var(--bg-seam);
         color: #fff;
         min-height: 100svh;
         display: grid;
@@ -101,8 +104,11 @@
         z-index: 1;
         width: min(var(--frame-w), 100vw);
         min-height: 100svh;
+        min-height: 100dvh;
         overflow: hidden;
-        background: var(--ink-blue) url("assets/background.png") center top / cover no-repeat;
+        /* artwork pinned to the bottom; the solid seam color fills any extra
+           height above it (the image's top edge is the same color) */
+        background: var(--bg-seam) url("assets/background.png") center bottom / 100% auto no-repeat;
         display: flex;
         flex-direction: column;
         padding: 14px 26px 0;
